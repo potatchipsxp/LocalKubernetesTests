@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Voting App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .options {
+            display: flex;
+            justify-content: space-around;
+            margin: 40px 0;
+        }
+        button {
+            padding: 20px 40px;
+            font-size: 24px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+        button:first-child {
+            background: #ff6b6b;
+            color: white;
+        }
+        button:last-child {
+            background: #4ecdc4;
+            color: white;
+        }
+        button:hover {
+            transform: scale(1.1);
+        }
+        .info {
+            text-align: center;
+            margin-top: 30px;
+            color: #666;
+            font-size: 14px;
+        }
+        .success {
+            text-align: center;
+            color: #51cf66;
+            font-size: 18px;
+            margin: 20px 0;
+        }
+        .pod-info {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 20px;
+            font-family: monospace;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🗳️ Cast Your Vote!</h1>
+        
+        {% if vote %}
+        <div class="success">
+            ✓ Vote recorded for {{ vote }}!
+        </div>
+        {% endif %}
+        
+        <form method="POST">
+            <div class="options">
+                <button name="vote" value="{{ option_a }}">{{ option_a }}</button>
+                <button name="vote" value="{{ option_b }}">{{ option_b }}</button>
+            </div>
+        </form>
+        
+        <div class="info">
+            Click repeatedly to generate load and watch pods scale!
+        </div>
+        
+        <div class="pod-info">
+            Served by pod: {{ hostname }}
+        </div>
+    </div>
+</body>
+</html>
