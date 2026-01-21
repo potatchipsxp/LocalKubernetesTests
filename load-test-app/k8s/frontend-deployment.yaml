@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  labels:
+    app: loadtest
+    component: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: loadtest
+      component: frontend
+  template:
+    metadata:
+      labels:
+        app: loadtest
+        component: frontend
+    spec:
+      containers:
+      - name: frontend
+        image: loadtest-frontend:latest
+        imagePullPolicy: Never  # Use local image
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 50m
+            memory: 64Mi
+          limits:
+            cpu: 100m
+            memory: 128Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+  labels:
+    app: loadtest
+    component: frontend
+spec:
+  type: NodePort
+  selector:
+    app: loadtest
+    component: frontend
+  ports:
+  - port: 80
+    targetPort: 80
+    nodePort: 30080  # Accessible at localhost:30080
