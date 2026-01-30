@@ -289,7 +289,7 @@
         let autoLoadInterval = null;
         let uniquePods = new Set();
         
-        const BACKEND_URL = 'http://localhost:30500';
+        const BACKEND_URL = `${window.location.protocol}//${window.location.hostname}:30500`;
         
         function addLog(message, type = 'info') {
             const log = document.getElementById('log');
